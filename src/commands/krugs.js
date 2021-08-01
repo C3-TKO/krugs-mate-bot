@@ -3,11 +3,13 @@ const { findNextEvent } = require("../db")
 
 module.exports = {
   name: "krugs",
-  description: "Shows the next krugs with all pairings and available players",
+  description: "Zeigt Dir das nächste Krug mit allen Paarungen sowie den Spielern auf der Suche nach Paarungen",
   execute(message, args) {
     (async () => {
       try {
         const nextEvent = await findNextEvent();
+        const earlySlotAvailablePlayers = nextEvent.slots.early.availablePlayers.map(availablePlayer => availablePlayer.username);
+        const lateSlotAvailablePlayers = nextEvent.slots.late.availablePlayers.map(availablePlayer => availablePlayer.username);
         
         const embed = {
           embed: {
@@ -49,7 +51,7 @@ module.exports = {
                       minWidth: 10,
                     }
                   ) +
-                  "```\n**Verfügbare Mitspieler:** cgn79, Letssetfire, Unbefugt",
+                  "```\n**Verfügbare Mitspieler:** " + earlySlotAvailablePlayers.join(', '),
               },
               { name: "\u200B", value: "\u200B" },
               {
@@ -83,14 +85,14 @@ module.exports = {
                       minWidth: 10,
                     }
                   ) +
-                  "```",
+                  "```\n**Verfügbare Mitspieler:** " + lateSlotAvailablePlayers.join(', '),
               },
             ],
           },
         };
         message.reply(embed);
       } catch (error) {
-        message.reply(`failed to fetch next krugs event. Reason: ${error}`);
+        message.reply(`Konnte kein Krug in Arachne finden. Grund: ${error}`);
       }
     })();
   },
