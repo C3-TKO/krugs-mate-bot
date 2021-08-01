@@ -3,6 +3,7 @@ const connectionString =
 
 const mongoose = require("mongoose");
 const eventSchema = require("./schemas/event.js");
+const formatDate = require("./utils/formatDate");
 const Event = mongoose.model("event", eventSchema, "events");
 
 const connector = mongoose.connect(connectionString, {
@@ -33,6 +34,12 @@ async function createNextEvent(date) {
   return event;
 }
 
+async function findNextEvent() {
+  const today = new Date()
+  return await Event.findOne({ date: {$gte: new Date(formatDate(today))} }).sort({date: 1});
+}
+
 module.exports = {
   createNextEvent,
+  findNextEvent
 };
