@@ -1,5 +1,6 @@
-const connectionString =
-  "mongodb+srv://krugs-mate-bot-access:IlVfVoyyOfVJjqql@krugs-mate-bot-cluster.pwmpx.mongodb.net/krugs-mate-bot?retryWrites=true&w=majority";
+const connectionString = process.env.MONGO_DB_CONNECTION_STRING
+
+const
 
 const mongoose = require("mongoose");
 const eventSchema = require("./schemas/event.js");
