@@ -8,6 +8,8 @@ module.exports = {
     (async () => {
       try {
         const nextEvent = await findNextEvent();
+        const earlySlotAvailablePlayers = nextEvent.slots.early.availablePlayers.map(availablePlayer => availablePlayer.username);
+        const lateSlotAvailablePlayers = nextEvent.slots.late.availablePlayers.map(availablePlayer => availablePlayer.username);
         
         const embed = {
           embed: {
@@ -49,7 +51,7 @@ module.exports = {
                       minWidth: 10,
                     }
                   ) +
-                  "```\n**Verfügbare Mitspieler:** cgn79, Letssetfire, Unbefugt",
+                  "```\n**Verfügbare Mitspieler:** " + earlySlotAvailablePlayers.join(', '),
               },
               { name: "\u200B", value: "\u200B" },
               {
@@ -83,7 +85,7 @@ module.exports = {
                       minWidth: 10,
                     }
                   ) +
-                  "```",
+                  "```\n**Verfügbare Mitspieler:** " + lateSlotAvailablePlayers.join(', '),
               },
             ],
           },

@@ -1,9 +1,9 @@
-const { findNextEvent, addPlayerToSlot } = require("../db");
+const { findNextEvent, removePlayerFromSlot } = require("../db");
 
 module.exports = {
-  name: "slot",
+  name: "unslot",
   description:
-    "Registers you for one or both slots of the next krugs as available player",
+    "Removes you from one or both slots of the next krugs as available player",
   execute(message, args) {
     (async () => {
       const nextEvent = await findNextEvent();
@@ -39,28 +39,28 @@ module.exports = {
                     const reaction = collected.first();
 
                     if (reaction.emoji.name === "1️⃣") {
-                      addPlayerToSlot(nextEvent._id, 'early', username)
+                      removePlayerFromSlot(nextEvent._id, 'early', username)
                       message.reply(
-                        `Du wurdest für den frühen Slot am ${nextEvent.date.toDateString()} eingetragen.`
+                        `Du wurdest vom frühen Slot am ${nextEvent.date.toDateString()} entfernt.`
                       );
                     }
                     if (reaction.emoji.name === "2️⃣") {
-                      addPlayerToSlot(nextEvent._id, 'late', username)
+                      removePlayerFromSlot(nextEvent._id, 'late', username)
                       message.reply(
-                        `Du wurdest für den späten Slot am ${nextEvent.date.toDateString()} eingetragen.`
+                        `Du wurdest vom späten Slot am ${nextEvent.date.toDateString()} entfernt.`
                       );
                     }
                     if (reaction.emoji.name === "3️⃣") {
-                      addPlayerToSlot(nextEvent._id, 'early', username)
-                      addPlayerToSlot(nextEvent._id, 'late', username)
+                      removePlayerFromSlot(nextEvent._id, 'early', username)
+                      removePlayerFromSlot(nextEvent._id, 'late', username)
                       message.reply(
-                        `Du wurdest für beide Slots am ${nextEvent.date.toDateString()} eingetragen.`
+                        `Du wurdest aus beiden Slots am ${nextEvent.date.toDateString()} entfernt.`
                       );
                     }
                   })
                   .catch((collected) => {
                     message.reply(
-                      `Du wurdest für keinen der beiden Slots am ${nextEvent.date.toDateString()} eingetragen. Zur Erinnerung: Du hast 1 Minute Zeit um Dich zu entscheiden und um auf die Optionen 1️⃣, 2️⃣  oder 3️⃣ zu reagieren.`
+                      `Du wurdest aus keinem der beiden Slots am ${nextEvent.date.toDateString()} entfenrt. Zur Erinnerung: Du hast 1 Minute Zeit um Dich zu entscheiden und um auf die Optionen 1️⃣, 2️⃣  oder 3️⃣ zu reagieren.`
                     );
                   })
               );
