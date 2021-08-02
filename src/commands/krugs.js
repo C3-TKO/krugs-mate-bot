@@ -3,7 +3,7 @@ const { findNextEvent } = require("../db")
 
 module.exports = {
   name: "krugs",
-  description: "Shows the next krugs with all pairings and available players",
+  description: "Zeigt Dir das nächste Krug mit allen Paarungen sowie den Spielern auf der Suche nach Paarungen",
   execute(message, args) {
     (async () => {
       try {
@@ -92,7 +92,7 @@ module.exports = {
         };
         message.reply(embed);
       } catch (error) {
-        message.reply(`failed to fetch next krugs event. Reason: ${error}`);
+        message.reply(`Konnte kein Krug in Arachne finden. Grund: ${error}`);
       }
     })();
   },

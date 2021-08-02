@@ -3,13 +3,13 @@ const { createNextEvent } = require("../db");
 
 module.exports = {
   name: "create",
-  description: "Creates a krugs event and deletes all event in past",
+  description: "Erstellt ein neues Krug Event und räumt alle vergangenen Events in Arachne wieder auf",
   execute(message, args) {
     if (!args.length) {
       const today = new Date();
 
       return message.reply(
-        "you didn't provide a date argument in format YYYY-MM-DD! Try it like this:\n```!create " +
+        "Du hast mir nicht ein Datum im Format YYYY-MM-DD gegeben! Versuche es bitte wie folgt:\n```!create " +
           formatDate(today) +
           "```"
       );
@@ -20,10 +20,10 @@ module.exports = {
         const nextEvent = await createNextEvent(args.shift());
         const nextEventDate = new Date(nextEvent.date);
         message.reply(
-          `created next krugs event at ${nextEventDate.toDateString()}.`
+          `ich habe ein neues Krugs am ${nextEventDate.toDateString()} erstellt.`
         );
       } catch (error) {
-        message.reply(`failed to create next krugs event. Reason: ${error}`);
+        message.reply(`Konnte kein Krug in Arachne anlegen - Grund: ${error}`);
       }
     })();
   },
