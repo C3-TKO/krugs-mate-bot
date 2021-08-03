@@ -13,9 +13,11 @@ const eventSchema = new mongoose.Schema({
   slots: {
     early: {
       availablePlayers: [{ username: String }],
+      matches: [{ usernameA: String, usernameB: String }],
     },
     late: {
       availablePlayers: [{ username: String }],
+      matches: [{ usernameA: String, usernameB: String }],
     },
   },
 });
