@@ -12,14 +12,13 @@ module.exports = {
       );
     }
 
-    const slotArgumentIndex = args.find(element => element === 'early' || 'late');
-    if (!slotArgumentIndex) {
+    if (args[0] !== 'early' && args[0] !== 'late') {
       return message.reply(
         "Du musst mir angeben in welchem Slot Du Dein Match haben möchtest. Versuche es bitte wie folgt:\n```!pair early @Kumachan```"
       );
     }
 
-    if(!args[0]) {
+    if(!args[1]) {
       return message.reply(
         "Du musst eine MitspielerIn taggen. Versuche es bitte wie folgt:\n```!pair early @Kumachan```"
       );
