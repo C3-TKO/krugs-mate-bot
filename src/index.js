@@ -3,6 +3,20 @@ const { prefix } = require("./config.json")
 const fs = require("fs");
 const Discord = require("discord.js");
 
+function getUserFromMention(mention) {
+	if (mention.startsWith('<@') && mention.endsWith('>')) {
+		mention = mention.slice(2, -1);
+
+		if (mention.startsWith('!')) {
+			mention = mention.slice(1);
+		}
+
+		return client.users.cache.get(mention);
+	}
+
+  return mention
+}
+
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
@@ -30,13 +44,14 @@ client.on("message", (message) => {
 
   const args = message.content.slice(prefix.length).trim().split(/ +/);
   const command = args.shift().toLowerCase();
+  const argsWithParsedUserFromMentions = args.map(arg => getUserFromMention(arg))
 
   if (!client.commands.has(command)) {
     return;
   }
 
   try {
-    client.commands.get(command).execute(message, args);
+    client.commands.get(command).execute(message, argsWithParsedUserFromMentions);
   } catch (error) {
     console.error(error);
     message.reply("bei der Ausführung Deines Befehls kame zu einem Fehler! Grund: " + error);

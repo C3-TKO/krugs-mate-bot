@@ -9,8 +9,6 @@ module.exports = {
       const nextEvent = await findNextEvent();
       const { username } = message.author;
 
-      console.log(username);
-
       const filter = (reaction, user) => {
         return (
           ["1️⃣", "2️⃣", "3️⃣"].includes(reaction.emoji.name) &&
