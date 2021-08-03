@@ -3,7 +3,7 @@ const _ = require("lodash");
 
 module.exports = {
   name: "pair",
-  description: "Trägt Dich und ein getaggtes Match aus der Liste der verfügbaren SpielerInnen ein",
+  description: "Trägt Dich und eine getaggte MitspielerIn aus der Liste der verfügbaren SpielerInnen für ein verabredetes Spiel in einem Slot im nächsten Krug ein",
   execute(message, args) {
     // Argument parsing
     if (!args.length) {
