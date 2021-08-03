@@ -52,7 +52,7 @@ async function addPlayerToSlot(krugsEventId, slot, username) {
   const { availablePlayers } = krugsEvent.slots[slot]
   const indexUsername = _.findIndex(availablePlayers, { 'username': username })
 
-  if (indexUsername >= 0 ) {
+  if (indexUsername !== -1 ) {
     console.log('Player already in slot list')
     return
   };
@@ -67,7 +67,7 @@ async function removePlayerFromSlot(krugsEventId, slot, username) {
 
   const indexUsername = _.findIndex(availablePlayers, { 'username': username })
 
-  if (indexUsername < 0 ) {
+  if (indexUsername === -1 ) {
     console.log('Player not found in slot list')
     return
   };
