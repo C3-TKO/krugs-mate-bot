@@ -10,7 +10,7 @@
   "author": "Interventor Kumachan",
   "license": "ISC",
   "dependencies": {
-    "columnify": "^1.5.4",
+    "columnify": "^1.6.0",
     "discord.js": "^12.5.3",
     "dotenv": "^10.0.0",
     "lodash": "^4.17.21",
